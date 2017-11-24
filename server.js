@@ -5,7 +5,7 @@ const port = 8000;
 
 const app = express();
 
-app.use(express.static('assets'));
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
