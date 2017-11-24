@@ -1,0 +1,39 @@
+.jumbotron {
+    background-color: white;
+    color: #ff4969
+}
+
+.lead {
+    color: #323a55;
+}
+
+#burger-pic {
+    margin: 0 auto;
+    display: block;
+    max-height: 300px;
+    margin-bottom: -8%
+}
+
+#content {
+    background-color: #323a55;
+    color: #61f7d5;
+    padding: 2% 20%
+}
+
+.content-hr {
+    border-color: #ff4969
+}
+
+ul li {
+    font-size: 20px;
+    margin-bottom: 2%;
+    margin-right: 2%
+}
+
+.btn {
+    background-color: #ff4969
+}
+
+.create-form {
+    margin-bottom: 2%
+}

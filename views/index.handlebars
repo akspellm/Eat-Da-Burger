@@ -1,29 +1,28 @@
-<h1>Eat Da Burger</h1>
+<div class="container-fluid" id="content">
+    <h3>Order a Burger:</h3>
+    <form class='create-form'>
 
+        <div class='form-group'>
+            <textarea class="form-control" id="burger" name="burger_name" rows="2"></textarea>
+        </div>
 
-<h3>Order a Burger:</h3>
-<form class='create-form'>
+        <button class="btn" type='submit'>Order!</button>
+    </form>
 
-    <div class='form-group'>
-        <label for="burger">Describe the burger you would like to devour</label>
-        <input type="text" id="burger" name="burger_name">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Ready to Devour!</h3>
+            <hr class="content-hr">
+            <ul>
+                {{#each burgers}} {{#unless devoured}} {{> burger-block}} {{/unless}} {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3>Already Devoured!</h3>
+            <hr class="content-hr">
+            <ul>
+                {{#each burgers}} {{#if devoured}} {{> devoured-block}} {{/if}} {{/each}}
+            </ul>
+        </div>
     </div>
-
-    <button type='submit'>Order!</button>
-</form>
-
-<ul>
-    {{#each burgers}}
-        {{#unless devoured}}
-            {{> burger-block}}
-        {{/unless}}
-    {{/each}}
-</ul>
-
-<ul>
-    {{#each burgers}}
-        {{#if devoured}}
-            {{> devoured-block}}
-        {{/if}}
-    {{/each}}
-</ul>
+</div>
