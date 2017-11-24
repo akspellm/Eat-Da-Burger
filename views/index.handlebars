@@ -1,5 +1,17 @@
 <h1>Eat Da Burger</h1>
 
+
+<h3>Order a Burger:</h3>
+<form class='create-form'>
+
+    <div class='form-group'>
+        <label for="burger">Describe the burger you would like to devour</label>
+        <input type="text" id="burger" name="burger_name">
+    </div>
+
+    <button type='submit'>Order!</button>
+</form>
+
 <ul>
     {{#each burgers}}
         {{#unless devoured}}

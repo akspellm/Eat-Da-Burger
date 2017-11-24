@@ -1,5 +1,16 @@
 const connection = require('../config/connection.js');
 
+
+function printQuestionMarks(num) {
+    let arr = [];
+
+    for (let i=0; i < num; i++) {
+       arr.push('?'); 
+    };
+
+    return arr.toString();
+};
+
 function objToSql(ob) {
     let arr = [];
 
@@ -41,7 +52,21 @@ const orm = {
 
             cb(result);
         });
-    }
+    },
+
+    insertOne: function(table, cols, vals, cb) {
+        let queryString = 'INSERT INTO ' + table + ' (' + cols.toString() + ') ' + 'VALUES (' + printQuestionMarks(vals.length) + ') ';
+
+        console.log(queryString);
+
+        connection.query(queryString, vals, function(err, result) {
+            if (err) {
+                throw err;
+            };
+
+            cb(result);
+        })
+    }   
     
 };
 module.exports = orm;
