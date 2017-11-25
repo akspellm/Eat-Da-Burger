@@ -1,4 +1,4 @@
-const connection = require('../config/connection.js');
+const pool = require('../config/connection.js');
 
 
 function printQuestionMarks(num) {
