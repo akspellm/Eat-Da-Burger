@@ -13,7 +13,7 @@ pool.connect(function(err) {
         console.error('error connecting: ' + err.stack);
         return;
     }
-    console.log('connected as id ' + connection.threadId);
+    console.log('connected as id ' + pool.threadId);
 });
 
-module.exports = connection;
+module.exports = pool;
