@@ -1,6 +1,4 @@
-CREATE DATABASE burgers_db;
-
-USE burgers_db;
+USE heroku_91fb397d2b7010f;
 
 CREATE TABLE burgers (
     id INTEGER AUTO_INCREMENT NOT NULL,
