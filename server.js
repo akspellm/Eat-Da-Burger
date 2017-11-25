@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const port = 8000;
-
 const app = express();
 
 app.use(express.static('public'));
@@ -18,4 +16,4 @@ const routes = require('./controllers/burgers_controller.js');
 
 app.use('/', routes);
 
-app.listen(port);
+app.listen(process.env.PORT || 5000)
