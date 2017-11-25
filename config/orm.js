@@ -4,8 +4,8 @@ const connection = require('../config/connection.js');
 function printQuestionMarks(num) {
     let arr = [];
 
-    for (let i=0; i < num; i++) {
-       arr.push('?'); 
+    for (let i = 0; i < num; i++) {
+        arr.push('?');
     };
 
     return arr.toString();
@@ -18,11 +18,11 @@ function objToSql(ob) {
         let value = ob[key];
 
         if (Object.hasOwnProperty.call(ob, key)) {
-            if (typeof value === 'string' && value.indexOf(' ') >=0) {
+            if (typeof value === 'string' && value.indexOf(' ') >= 0) {
                 value = "'" + value + "'";
             }
-        
-        arr.push(key + "=" + value);
+
+            arr.push(key + "=" + value);
         }
     }
 
@@ -30,43 +30,54 @@ function objToSql(ob) {
 };
 
 const orm = {
-    selectAll: function(tableInput, done) {
+    selectAll: function (tableInput, done) {
         var queryString = 'SELECT * FROM ' + tableInput + ';';
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err;
-            }
-            done(result);
+        pool.getConnection(function (err, connection) {
+
+            connection.query(queryString, function (err, result) {
+                if (err) {
+                    throw err;
+                }
+                done(result);
+
+                connection.release();
+                if (err) throw err;
+            });
         });
     },
 
-    updateOne: function(table, objColVals, condition, done) {
-        let queryString ='UPDATE ' + table + ' SET ' + objToSql(objColVals) + ' WHERE ' + condition;
+    updateOne: function (table, objColVals, condition, done) {
+        let queryString = 'UPDATE ' + table + ' SET ' + objToSql(objColVals) + ' WHERE ' + condition;
 
-        console.log(queryString);
+        pool.getConnection(function (err, connection) {
 
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err;
-            }
+            connection.query(queryString, function (err, result) {
+                if (err) {
+                    throw err;
+                }
+                done(result);
 
-            done(result);
+                connection.release();
+                if (err) throw err;
+            });
         });
     },
 
-    insertOne: function(table, cols, vals, done) {
+    insertOne: function (table, cols, vals, done) {
         let queryString = 'INSERT INTO ' + table + ' (' + cols.toString() + ') ' + 'VALUES (' + printQuestionMarks(vals.length) + ') ';
 
-        console.log(queryString);
+        pool.getConnection(function (err, connection) {
 
-        connection.query(queryString, vals, function(err, result) {
-            if (err) {
-                throw err;
-            };
+            connection.query(queryString, function (err, result) {
+                if (err) {
+                    throw err;
+                }
+                done(result);
 
-            done(result);
-        })
-    }   
-    
+                connection.release();
+                if (err) throw err;
+            });
+        });
+    }
 };
 module.exports = orm;
